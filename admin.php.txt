@@ -1,0 +1,52 @@
+<?php
+session_start(); 
+if(isset($_SESSION['admin']))
+{
+session_unset(); 
+session_destroy();
+}
+?>
+
+<head>
+<title>start page</title>
+<body>
+<?php 
+if(isset($_POST['Submit']))
+{
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = '';
+$dbname = 'infiniz';
+$conn = mysql_connect($dbhost, $dbuser, $dbpass) or die ('Error connecting to mysql');
+mysql_select_db($dbname);
+
+$msg="";
+$name=$_REQUEST['nm'];
+$pwd=$_REQUEST['pwd'];
+
+if($nm==="naveen" && $pwd==="infiniz")
+{
+$_SESSION['admin']=$nm;
+
+$link='mark.php';
+echo "<script>window.open('".$link."','_self')</script>";
+}
+else
+{
+session_unset(); 
+$msg="Invalid User ID ! Please Check Your User ID";
+}
+
+}
+
+?>
+<form name="form1" action="strt.php" method="post">
+<h1>          <?php if(isset($msg)){ echo $msg;  }?></h1>
+
+Name : <input type="text" name="nm" size="20" maxlength="20"><br>
+password : <input type="text" name="pwd" size="20" maxlength="20"><br>
+
+          <input type="submit" name="Submit" value="Submit">
+</form>
+</body>
+</html>
