@@ -54,7 +54,7 @@ echo $qr;
 mysql_close($conn);
 $link='index.php';
 echo "<script>window.open('".$link."','_self')</script>";
-
+//<!-- this is for testing -->
 
 }
 else
